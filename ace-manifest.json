@@ -1,5 +1,219 @@
 {
   "commands": {
+    "db:create": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/DbCreate",
+      "commandName": "db:create",
+      "description": "create database",
+      "args": [],
+      "aliases": [],
+      "flags": []
+    },
+    "db:drop": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/DbDrop",
+      "commandName": "db:drop",
+      "description": "drop database",
+      "args": [],
+      "aliases": [],
+      "flags": []
+    },
+    "make:controller:api": {
+      "settings": {},
+      "commandPath": "./commands/MakeControllerApi",
+      "commandName": "make:controller:api",
+      "description": "Make a new HTTP controller for API only",
+      "args": [
+        {
+          "type": "string",
+          "propertyName": "name",
+          "name": "name",
+          "required": true,
+          "description": "Name of the controller class"
+        }
+      ],
+      "aliases": [],
+      "flags": [
+        {
+          "name": "resource",
+          "propertyName": "resource",
+          "type": "boolean",
+          "description": "Add resourceful methods to the controller class",
+          "alias": "r"
+        },
+        {
+          "name": "exact",
+          "propertyName": "exact",
+          "type": "boolean",
+          "description": "Create the controller with the exact name as provided",
+          "alias": "e"
+        },
+        {
+          "name": "without-rbac",
+          "propertyName": "withoutRBAC",
+          "type": "boolean",
+          "alias": "wr",
+          "description": "Without RBAC"
+        }
+      ]
+    },
+    "make:migration:new": {
+      "settings": {
+        "loadApp": true
+      },
+      "commandPath": "./commands/MakeMigrationNew",
+      "commandName": "make:migration:new",
+      "description": "Make a new migration file for MySQL",
+      "args": [
+        {
+          "type": "string",
+          "propertyName": "name",
+          "name": "name",
+          "required": true,
+          "description": "Name of the migration file"
+        }
+      ],
+      "aliases": [],
+      "flags": [
+        {
+          "name": "connection",
+          "propertyName": "connection",
+          "type": "string",
+          "description": "The connection flag is used to lookup the directory for the migration file"
+        },
+        {
+          "name": "folder",
+          "propertyName": "folder",
+          "type": "string",
+          "description": "Pre-select a migration directory"
+        },
+        {
+          "name": "create",
+          "propertyName": "create",
+          "type": "string",
+          "description": "Define the table name for creating a new table"
+        },
+        {
+          "name": "table",
+          "propertyName": "table",
+          "type": "string",
+          "description": "Define the table name for altering an existing table"
+        }
+      ]
+    },
+    "make:model:new": {
+      "settings": {
+        "loadApp": true
+      },
+      "commandPath": "./commands/MakeModelNew",
+      "commandName": "make:model:new",
+      "description": "Make a new Lucid model for MySQL",
+      "args": [
+        {
+          "type": "string",
+          "propertyName": "name",
+          "name": "name",
+          "required": true,
+          "description": "Name of the model class"
+        }
+      ],
+      "aliases": [],
+      "flags": [
+        {
+          "name": "migration",
+          "propertyName": "migration",
+          "type": "boolean",
+          "alias": "m",
+          "description": "Generate the migration for the model"
+        },
+        {
+          "name": "controller",
+          "propertyName": "controller",
+          "type": "boolean",
+          "alias": "c",
+          "description": "Generate the controller for the model"
+        }
+      ]
+    },
+    "make:permission": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/MakePermission",
+      "commandName": "make:permission",
+      "description": "create permission class, pass the name of object into singular form",
+      "args": [
+        {
+          "type": "string",
+          "propertyName": "name",
+          "name": "name",
+          "required": true,
+          "description": "Name of the permission class"
+        }
+      ],
+      "aliases": [],
+      "flags": []
+    },
+    "make:validator:api": {
+      "settings": {},
+      "commandPath": "./commands/MakeValidatorApi",
+      "commandName": "make:validator:api",
+      "description": "validator for API only",
+      "args": [
+        {
+          "type": "string",
+          "propertyName": "name",
+          "name": "name",
+          "required": true,
+          "description": "Name of the validator class"
+        }
+      ],
+      "aliases": [],
+      "flags": [
+        {
+          "name": "exact",
+          "propertyName": "exact",
+          "type": "boolean",
+          "description": "Create the validator with the exact name as provided",
+          "alias": "e"
+        }
+      ]
+    },
+    "scaffold": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/Scaffold",
+      "commandName": "scaffold",
+      "description": "creates model, migration, controller and route",
+      "args": [
+        {
+          "type": "string",
+          "propertyName": "name",
+          "name": "name",
+          "required": true,
+          "description": "Name of the scaffold class"
+        }
+      ],
+      "aliases": [],
+      "flags": [
+        {
+          "name": "without-rbac",
+          "propertyName": "withoutRBAC",
+          "type": "boolean",
+          "alias": "wr",
+          "description": "Without RBAC"
+        }
+      ]
+    },
     "dump:rcfile": {
       "settings": {},
       "commandPath": "@adonisjs/core/build/commands/DumpRc",

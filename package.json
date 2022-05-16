@@ -4,8 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "node ace serve --watch",
-    "build": "node ace build --production",
-    "start": "node server.js"
+    "debug": "node ace serve --watch --node-args='--inspect'",
+    "build": "node ace build --production; cp .env build/.env",
+    "start": "node ace serve --watch",
+    "ace": "node ace",
+    "ace-h": "node ace -h",
+    "routes": "node ace list:routes",
+    "db:setup": "node ace db:drop; node ace db:create; node ace migration:run; node ace db:seed",
+    "db:setup:win": "node ace db:drop && node ace db:create && node ace migration:run && node ace db:seed"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.6.2",

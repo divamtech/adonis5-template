@@ -1,0 +1,49 @@
+import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import BaseController from './BaseController'
+import {{ modelName }}Validator from 'App/Validators/Api/{{ modelName }}Validator'
+import {{ modelName }} from 'App/Models/{{ modelName }}'
+
+export default class {{ filename }} extends BaseController {
+  public async index(ctx: HttpContextContract) {
+    const {{modelVariables}} = await {{ modelName }}.query().paginate(ctx.request.input('page', 1))
+    return ctx.response.json({{modelVariables}}.serialize())
+  }
+
+  public async store(ctx: HttpContextContract) {
+    ctx.request.updateBody(await ctx.request.validate({{ modelName }}Validator.Store))
+    const data = ctx.request.only(Object.keys({{ modelName }}.$keys.serializedToAttributes.all()))
+    const {{ modelVariable }} = await {{ modelName }}.create(data)
+    return ctx.response.status(201).json({{ modelVariable }}.serialize())
+  }
+
+  public async show(ctx: HttpContextContract) {
+    const {{ modelVariable }} = await this.find{{ modelName }}(ctx)
+    if ({{ modelVariable }}) return ctx.response.json({{modelVariable}}.serialize())
+  }
+
+  public async update(ctx: HttpContextContract) {
+    ctx.request.updateBody(await ctx.request.validate({{ modelName }}Validator.Update))
+    const data = ctx.request.only(Object.keys({{ modelName }}.$keys.serializedToAttributes.all()))
+    const {{ modelVariable }} = await this.find{{ modelName }}(ctx)
+    if ({{ modelVariable }}) {
+      await {{ modelVariable }}.merge(data).save()
+      return ctx.response.json({{ modelVariable }}.serialize())
+    }
+  }
+
+  public async destroy(ctx: HttpContextContract) {
+    const {{ modelVariable }} = await this.find{{ modelName }}(ctx)
+    if ({{ modelVariable }}) {
+      await {{ modelVariable }}.delete()
+      return ctx.response.json({ message: '{{ modelName }} deleted.' })
+    }
+  }
+
+  private async find{{ modelName }}(ctx: HttpContextContract): Promise<{{ modelName }} | null> {
+    const {{ modelVariable }} = await {{ modelName }}.query().where('id', ctx.params.id).first()
+    if ({{ modelVariable }}) return {{ modelVariable }}
+    const message = "{{ modelVariable }} doesn't exist."
+    ctx.response.status(400).json({ message, errors: [{ id: ctx.params.id, code: 'E_NOT_EXIST', message }] })
+    return null
+  }
+}

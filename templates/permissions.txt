@@ -1,0 +1,27 @@
+export default [
+  {
+    name: '{{ modelName }} list',
+    desc: 'User can get {{ modelVariable }} list',
+    access: '{{ modelVariables }}.index',
+  },
+  {
+    name: '{{ modelName }} create',
+    desc: 'User can create {{ modelVariable }}',
+    access: '{{ modelVariables }}.store',
+  },
+  {
+    name: '{{ modelName }} read',
+    desc: 'User can get {{ modelVariable }} information',
+    access: '{{ modelVariables }}.show',
+  },
+  {
+    name: '{{ modelName }} update',
+    desc: 'User can update {{ modelVariable }} information',
+    access: '{{ modelVariables }}.update',
+  },
+  {
+    name: '{{ modelName }} delete',
+    desc: 'User can delete {{ modelVariable }} information',
+    access: '{{ modelVariables }}.destroy',
+  },
+]

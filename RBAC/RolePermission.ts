@@ -1,4 +1,4 @@
-import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+// import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Transform from 'App/Utils/Transform'
 
 class Permission extends Transform {
@@ -100,15 +100,16 @@ const rolePermissionSingleton = new RolePermission()
 */
 const can = function (access: string, message: string = "You don't have permission to access the resource") {
   return function (_0: any, _1: string, descriptor: PropertyDescriptor) {
-    const fn = descriptor.value
-    if (typeof fn == 'function') {
-      descriptor.value = function (ctx: HttpContextContract) {
-        if (!ctx.access || !ctx.access.can(access)) {
-          return ctx.response.status(403).json({ message })
-        }
-        return fn.call(this, ctx)
-      }
-    }
+    //FIXME: temporary commented below lines
+    // const fn = descriptor.value
+    // if (typeof fn == 'function') {
+    //   descriptor.value = function (ctx: HttpContextContract) {
+    //     if (!ctx.access || !ctx.access.can(access)) {
+    //       return ctx.response.status(403).json({ message })
+    //     }
+    //     return fn.call(this, ctx)
+    //   }
+    // }
     return descriptor
   }
 }

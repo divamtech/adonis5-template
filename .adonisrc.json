@@ -17,7 +17,10 @@
   "preloads": [
     "./start/routes",
     "./start/kernel",
-    "./start/LoadRBAC"
+    "./start/LoadRBAC",
+    "./start/events",
+    "./start/global",
+    "./start/views"
   ],
   "providers": [
     "./providers/AppProvider",

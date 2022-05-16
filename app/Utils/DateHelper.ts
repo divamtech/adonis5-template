@@ -1,9 +1,13 @@
 import { DateTime } from 'luxon'
 
-export default class Date {
+export default class DateHelper {
+  public static date(date: string, format: string = 'yyyy-MM-dd'): DateTime {
+    return DateTime.fromFormat(date, format)
+  }
+
   public static todayDate(format: string = 'yyyy-MM-dd'): DateTime {
     const date = DateTime.local().toFormat(format)
-    return DateTime.fromFormat(date, format)
+    return DateHelper.date(date, format)
   }
 
   public static modifyDate(days: number = 0, hours: number = 0, format: string = 'yyyy-MM-dd'): DateTime {

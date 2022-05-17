@@ -2,9 +2,7 @@ import { args } from '@adonisjs/core/build/standalone'
 import { basename, join } from 'path'
 import { StringTransformer } from '@adonisjs/ace/build/src/Generator/StringTransformer'
 import { BaseGenerator } from '@adonisjs/assembler/build/commands/Make/Base'
-import ChangeCase from 'App/Utils/ChangeCase'
-
-
+import ChangeCase from '../app/Utils/ChangeCase'
 
 export default class MakePermission extends BaseGenerator {
   /**

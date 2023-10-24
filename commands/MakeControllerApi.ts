@@ -11,18 +11,15 @@ export default class MakeControllerApi extends Controller {
   @flags.boolean({ alias: 'wr', description: 'Without RBAC' })
   public withoutRBAC: boolean
 
+  public static settings = {
+    loadApp: true,
+    stayAlive: false,
+  }
+
   protected templateData(): any {
-    const modelName = new StringTransformer(basename(this.name))
-      .dropExtension()
-      .changeForm('singular')
-      .changeCase('pascalcase')
-      .toValue()
+    const modelName = new StringTransformer(basename(this.name)).dropExtension().changeForm('singular').changeCase('pascalcase').toValue()
     const modelVariable = ChangeCase.variableCase(modelName)
-    const ctrlPrefix = new StringTransformer(basename(this.name))
-      .dropExtension()
-      .changeForm('plural')
-      .changeCase('pascalcase')
-      .toValue()
+    const ctrlPrefix = new StringTransformer(basename(this.name)).dropExtension().changeForm('plural').changeCase('pascalcase').toValue()
     const modelVariables = ChangeCase.variableCase(ctrlPrefix)
     return { modelName, modelVariable, modelVariables }
   }

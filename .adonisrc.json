@@ -17,7 +17,6 @@
   "preloads": [
     "./start/routes",
     "./start/kernel",
-    "./start/LoadRBAC",
     "./start/events",
     "./start/global",
     "./start/views"
@@ -28,7 +27,9 @@
     "@adonisjs/session",
     "@adonisjs/view",
     "@adonisjs/shield",
-    "@adonisjs/lucid"
+    "@adonisjs/lucid",
+    "@adonisjs/drive-s3",
+    "@adonisjs/auth"
   ],
   "metaFiles": [
     {

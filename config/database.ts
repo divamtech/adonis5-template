@@ -6,7 +6,7 @@
  */
 
 import Env from '@ioc:Adonis/Core/Env'
-import { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
+import type { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
 
 const databaseConfig: DatabaseConfig = {
   /*
@@ -19,7 +19,7 @@ const databaseConfig: DatabaseConfig = {
   | file.
   |
   */
-  connection: Env.get('DB_CONNECTION', 'mysql'),
+  connection: Env.get('DB_CONNECTION'),
 
   connections: {
     /*
@@ -42,14 +42,17 @@ const databaseConfig: DatabaseConfig = {
         password: Env.get('MYSQL_PASSWORD', ''),
         database: Env.get('MYSQL_DB_NAME'),
       },
+      pool: {
+        min: 1,
+        max: 100,
+      },
       migrations: {
         naturalSort: true,
       },
-      healthCheck: false,
+      healthCheck: true,
       debug: Env.get('NODE_ENV') !== 'production',
     },
-
-  }
+  },
 }
 
 export default databaseConfig

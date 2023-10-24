@@ -8,8 +8,8 @@ Event.on('db:query', (query) => {
   const qBinding = query.bindings
   let finalQuery = query.sql
   if (qBinding) {
-    qBinding.forEach(b => {
-      finalQuery = finalQuery.replace('?', typeof (b) == 'string' ? `'${b}'` : b)
+    qBinding.forEach((b) => {
+      finalQuery = finalQuery.replace('?', typeof b == 'string' ? `'${b}'` : b)
     })
   }
   if (Application.inProduction) {

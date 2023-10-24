@@ -19,14 +19,9 @@ export default class Scaffold extends BaseCommand {
   }
 
   public async run(): Promise<void> {
-
-
     await this.kernel.exec('make:model:new', [this.name, '-m'])
     await this.kernel.exec('make:validator:api', [this.name])
     await this.kernel.exec('make:controller:api', [this.name, this.withoutRBAC ? '-wr' : ''])
-    if (!this.withoutRBAC) {
-      await this.kernel.exec('make:permission', [this.name])
-    }
 
     const modelVariables = new StringTransformer(basename(this.name))
       .dropExtension()
@@ -34,11 +29,7 @@ export default class Scaffold extends BaseCommand {
       .changeCase('snakecase')
       .toValue()
       .toLowerCase()
-    let ctrlPrefix = new StringTransformer(basename(this.name))
-      .dropExtension()
-      .changeForm('plural')
-      .changeCase('pascalcase')
-      .toValue()
+    let ctrlPrefix = new StringTransformer(basename(this.name)).dropExtension().changeForm('plural').changeCase('pascalcase').toValue()
     ctrlPrefix = this.name.replace(basename(this.name), ctrlPrefix)
     const route = `\r\nRoute.resource('${modelVariables}', 'Api/${ctrlPrefix}Controller').apiOnly()\r\n`
     const routePath = join(__dirname, '..', 'start', 'routes.ts')
@@ -57,8 +48,6 @@ export default class Scaffold extends BaseCommand {
         PUT, PATCH │ ${modelVariables}/:id │ Api/${ctrlPrefix}Controller.update  │ ${modelVariables}.update
         ────────────────────────────────────────────────────────────────────────────────────
         DELETE     │ ${modelVariables}/:id │ Api/${ctrlPrefix}Controller.destroy │ ${modelVariables}.destroy
-      `
-    )
-
+      `)
   }
 }

@@ -21,7 +21,9 @@ import Server from '@ioc:Adonis/Core/Server'
 |
 */
 Server.middleware.register([
+  () => import('App/Middleware/HttpReqResLogger'),
   () => import('@ioc:Adonis/Core/BodyParser'),
+  () => import('@ioc:Adonis/Addons/Shield'),
 ])
 
 /*
@@ -40,5 +42,4 @@ Server.middleware.register([
 | Route.get('dashboard', 'UserController.dashboard').middleware('auth')
 |
 */
-Server.middleware.registerNamed({
-})
+Server.middleware.registerNamed({})

@@ -9,9 +9,7 @@ class CommonRules {
   }
 
   public static schemaStore() {
-    return {
-      ...this.commonSchema(),
-    }
+    return this.commonSchema()
   }
 
   public static schemaUpdate(id) {
@@ -21,29 +19,22 @@ class CommonRules {
   }
 
   public static commonMessages() {
-    return {
-    }
+    return {}
   }
 
   public static messagesStore() {
-    return {
-      ...this.commonMessages(),
-    }
+    return this.commonMessages()
   }
 
   public static messagesUpdate() {
-    return {
-      ...this.commonMessages(),
-    }
+    return this.commonMessages()
   }
 }
 
 class Store {
   constructor(protected ctx: HttpContextContract) { }
 
-  public schema = schema.create({
-    ...CommonRules.schemaStore(),
-  })
+  public schema = schema.create(CommonRules.schemaStore())
 
   public reporter = validator.reporters.api
 
@@ -58,9 +49,7 @@ class Update {
     id: this.ctx.params.id
   })
 
-  public schema = schema.create({
-    ...CommonRules.schemaUpdate(this.refs.id),
-  })
+  public schema = schema.create(CommonRules.schemaUpdate(this.refs.id))
 
   public reporter = validator.reporters.api
 

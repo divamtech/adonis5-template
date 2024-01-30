@@ -24,10 +24,10 @@ export default Env.rules({
   DRIVE_DISK: Env.schema.enum(['local', 's3'] as const),
   NODE_ENV: Env.schema.enum(['development', 'production', 'test'] as const),
 
-  AWS_S3_KEY: Env.schema.string(),
-  AWS_S3_SECRET: Env.schema.string(),
-  AWS_S3_BUCKET: Env.schema.string(),
-  AWS_S3_REGION: Env.schema.string(),
+  AWS_S3_KEY: Env.schema.string.optional(), //FIXME: temp change to optional
+  AWS_S3_SECRET: Env.schema.string.optional(), //FIXME: temp change to optional
+  AWS_S3_BUCKET: Env.schema.string.optional(), //FIXME: temp change to optional
+  AWS_S3_REGION: Env.schema.string.optional(), //FIXME: temp change to optional
   AWS_S3_ENDPOINT: Env.schema.string.optional(),
 
   DB_CONNECTION: Env.schema.string(),
@@ -36,4 +36,19 @@ export default Env.rules({
   MYSQL_USER: Env.schema.string(),
   MYSQL_PASSWORD: Env.schema.string.optional(),
   MYSQL_DB_NAME: Env.schema.string(),
+
+  BULL_SERVER_PORT: Env.schema.number.optional(),
+  BULL_CONNECTION: Env.schema.enum(['bull', 'direct_uri'] as const),
+
+  REDIS_DATABASE: Env.schema.number.optional(),
+  REDIS_HOST: Env.schema.string({ format: 'host' }),
+  REDIS_PORT: Env.schema.number.optional(),
+  REDIS_PASSWORD: Env.schema.string.optional(),
+  REDIS_URI: Env.schema.string.optional(),
+
+  SMTP_HOST: Env.schema.string({ format: 'host' }),
+  SMTP_PORT: Env.schema.number(),
+  SMTP_USERNAME: Env.schema.string(),
+  SMTP_PASSWORD: Env.schema.string(),
+  COMPANY_EMAIL: Env.schema.string(),
 })

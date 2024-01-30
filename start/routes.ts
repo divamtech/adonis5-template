@@ -19,6 +19,10 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import './routes/webRoutes'
+
+const API_PREFIX = '/api/'
+// const All_MIDDLEWARE = ['auth:api', 'loadBusiness', 'setBranch', 'acl']
 
 Route.get('/', async ({ view }) => {
   return view.render('welcome')

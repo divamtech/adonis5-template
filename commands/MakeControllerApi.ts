@@ -1,4 +1,3 @@
-import { flags } from '@adonisjs/core/build/standalone'
 import Controller from '@adonisjs/assembler/build/commands/Make/Controller'
 import { basename, join } from 'path'
 import { StringTransformer } from '@adonisjs/ace/build/src/Generator/StringTransformer'
@@ -7,9 +6,6 @@ import ChangeCase from '../app/Utils/ChangeCase'
 export default class MakeControllerApi extends Controller {
   public static commandName = 'make:controller:api'
   public static description = 'Make a new HTTP controller for API only'
-
-  @flags.boolean({ alias: 'wr', description: 'Without RBAC' })
-  public withoutRBAC: boolean
 
   public static settings = {
     loadApp: true,
@@ -25,7 +21,7 @@ export default class MakeControllerApi extends Controller {
   }
 
   protected getStub(): string {
-    return join(__dirname, '..', 'templates', this.withoutRBAC ? 'controller.txt' : 'controller-permission.txt')
+    return join(__dirname, '..', 'templates', 'controller.txt')
   }
 
   protected getDestinationPath(): string {

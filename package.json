@@ -1,5 +1,5 @@
 {
-  "name": "webledger-server",
+  "name": "GoAvidoServer",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -28,14 +28,18 @@
     "@adonisjs/core": "^5.7.6",
     "@adonisjs/drive-s3": "^1.3.3",
     "@adonisjs/lucid": "^18.4.2",
+    "@adonisjs/mail": "^8.2.1",
     "@adonisjs/repl": "^3.1.10",
     "@adonisjs/session": "^6.2.3",
     "@adonisjs/shield": "^7.0.10",
     "@adonisjs/view": "^6.1.4",
+    "@rocketseat/adonis-bull": "^1.0.4",
     "axios": "^1.5.1",
+    "http-proxy": "^1.18.1",
     "luxon": "^2.4.0",
     "moment": "^2.29.3",
     "mysql2": "^2.3.3",
+    "pretty-ms": "^7.0.1",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.21"

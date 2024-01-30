@@ -10,8 +10,8 @@ export default class {{ filename }} extends BaseController {
   }
 
   public async store(ctx: HttpContextContract) {
-    ctx.request.updateBody(await ctx.request.validate({{ modelName }}Validator.Store))
-    const data = ctx.request.only(Object.keys({{ modelName }}.$keys.serializedToAttributes.all()))
+    const filterData = await ctx.request.validate({{ modelName }}Validator.Store)
+    const data = {{ modelName }}.filterData(filterData)
     const {{ modelVariable }} = await {{ modelName }}.create(data)
     return ctx.response.status(201).json({{ modelVariable }}.serialize())
   }
@@ -22,11 +22,10 @@ export default class {{ filename }} extends BaseController {
   }
 
   public async update(ctx: HttpContextContract) {
-    ctx.request.updateBody(await ctx.request.validate({{ modelName }}Validator.Update))
-    const data = ctx.request.only(Object.keys({{ modelName }}.$keys.serializedToAttributes.all()))
+    const filterData = await ctx.request.validate({{ modelName }}Validator.Update)
     const {{ modelVariable }} = await this.find{{ modelName }}(ctx)
     if ({{ modelVariable }}) {
-      await {{ modelVariable }}.merge(data).save()
+      await {{ modelVariable }}.filterAndMerge(filterData).save()
       return ctx.response.json({{ modelVariable }}.serialize())
     }
   }

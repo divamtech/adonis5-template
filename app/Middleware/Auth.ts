@@ -13,7 +13,7 @@ export default class AuthMiddleware {
   /**
    * The URL to redirect to when request is Unauthorized
    */
-  protected redirectTo = '/admin'
+  protected redirectTo = '/login'
 
   /**
    * Authenticates the current HTTP request against a custom set of defined
@@ -55,13 +55,32 @@ export default class AuthMiddleware {
   /**
    * Handle request
    */
-  public async handle({ auth }: HttpContextContract, next: () => Promise<void>, customGuards: (keyof GuardsList)[]) {
+  public async handle(ctx: HttpContextContract, next: () => Promise<void>, customGuards: (keyof GuardsList)[]) {
     /**
      * Uses the user defined guards or the default guard mentioned in
      * the config file
      */
-    const guards = customGuards.length ? customGuards : [auth.name]
-    await this.authenticate(auth, guards)
+    const guards = customGuards.length ? customGuards : [ctx.auth.name]
+    try {
+      await this.authenticate(ctx.auth, guards)
+    } catch (e) {
+      if (ctx.request.url().includes('/admin')) {
+        return ctx.response.redirect().toRoute('admin.root')
+      }
+
+      if (e.code == 'E_UNAUTHORIZED_ACCESS') {
+        return ctx.response.status(401).json({
+          message: 'Empty or Invalid authorization header',
+          errors: [
+            {
+              rule: 'E_UNAUTHORIZED_ACCESS',
+              field: 'Authorization',
+              message: 'Invalid auth token',
+            },
+          ],
+        })
+      }
+    }
     await next()
   }
 }

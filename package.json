@@ -39,6 +39,7 @@
     "luxon": "^2.4.0",
     "moment": "^2.29.3",
     "mysql2": "^2.3.3",
+    "phc-argon2": "^1.1.4",
     "pretty-ms": "^7.0.1",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
